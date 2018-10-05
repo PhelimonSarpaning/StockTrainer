@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import logo from '../assets/logo.svg';
 import '../css/App.css';
+import SignUp from './SignUp';
 
 class Main extends Component {
+
+  constructor (props) {
+    super(props);
+  }
+
+  
+
   render () {
     return (
-      <div>
-        Hello world
+      <div className='mainmenu'>
+        hello
       </div>
     );
   }
