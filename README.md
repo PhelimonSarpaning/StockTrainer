@@ -20,6 +20,10 @@ Stock Trading Simulator
 - run Npm init
 - Build project
 
+## Running the App
+- start the spring boot server
+- run npm start in the stocktrain_frontend directory
+
 ## User Stories and Features
 
 - User can create an account
