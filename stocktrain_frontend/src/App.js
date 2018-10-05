@@ -26,7 +26,7 @@ class App extends Component {
   LoginActive () {
     if (this.state.loginActive) {
       return(
-        <SignUp/> 
+        <SignUp loginActive={this.activateLogin}/> 
       );
     }
   }
