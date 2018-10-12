@@ -17,10 +17,10 @@ class NavBar extends Component {
         <div className='navbar-nav mr-auto'>
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Login</button>
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Log In</button>
             </li>
             <li className="nav-item">
- 
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Sign Up</button>
             </li>
             <li className="nav-item">
 

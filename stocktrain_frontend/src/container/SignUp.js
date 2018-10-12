@@ -37,7 +37,7 @@ class SignUp extends Component {
     this.props.loginActive(event)
   }
 
-  amendStateInfo(event) {
+  amendStateInfo (event) {
     event.preventDefault()
     this.state.userEmail = event.target.value
   }
