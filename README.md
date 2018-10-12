@@ -5,14 +5,15 @@ Stock Trading Simulator
 
 - Maven
 - Java 8/ Spring Boot
-- Couchbase Db
+- MongoDb
 - React Javascript
 
 ## Dependencies
 
 - JRE/ SDK v8
+- Selenium/ Gekodriver
 - Node
-- Couchbase
+- MongoDb
 
 ## Installation
 
