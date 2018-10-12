@@ -3,7 +3,7 @@ package com.JBank.src.features;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.junit.After;
@@ -30,6 +30,7 @@ public class HomePageFeaturesTest {
 	
 	private String expectedText;
 	private WebElement testElement;
+	private List<WebElement> testElementList;
 	
 	private Callable<Boolean> pageLoaded(final WebElement element, final String expected) {
 		return new Callable<Boolean>() {
@@ -55,7 +56,7 @@ public class HomePageFeaturesTest {
 	public void initialize() {
 		driver = new FirefoxDriver();
 		driver.get("http://localhost:3000/home");
-		await().atMost(4, SECONDS).until(pageLoaded(driver.findElement(By.tagName("body")), "Stock Train"));
+		await().atMost(5, SECONDS).until(pageLoaded(driver.findElement(By.tagName("body")), "Stock Train"));
 	}
 	
 	@After
@@ -98,8 +99,45 @@ public class HomePageFeaturesTest {
 	
 	// signup actions
 	
-	@Test
-	public void signUpTestClickFormShowsUsernameField() {
+	private void signUpAssertions(String expected) {
+		driver.findElement(By.id("SignUpTrig")).click();
+		testElementList = driver.findElements(By.xpath("//div[@id = 'signupDiv']//input"));
+		testElement = testElementList.stream()
+				.filter(x -> x.getAttribute("id").equals(expected))
+				.findAny()
+				.orElse(null);
+		assertNotNull(testElement);
 		
 	}
+	
+	@Test
+	public void signUpTestClickFormShowsEmailField() {
+		signUpAssertions("userEmail");
+	}
+	
+	@Test
+	public void signUpTestClickFormShowsUsernameField() {
+		signUpAssertions("usernameField");
+	}
+	
+	@Test
+	public void signUpTestClickFormShowsPasswordField() {
+		signUpAssertions("passwordField");
+	}
+	
+	@Test
+	public void signUpTestClickFormShowsConfPasswordField() {
+		signUpAssertions("confirmPasswordField");
+	}
+	
+	@Test
+	public void signUpTestClickFormShowsSubmitField() {
+		driver.findElement(By.id("SignUpTrig")).click();
+		testElementList = driver.findElements(By.xpath("//div[@id = 'signupDiv']//button"));
+	}
+	
+	
+	
+	
+	
 }

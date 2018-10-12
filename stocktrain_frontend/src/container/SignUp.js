@@ -22,12 +22,12 @@ class SignUp extends Component {
   userSignUp () {
     return (
       <form>
-        <div className='form-group'>
+        <div id="signupDiv" className='form-group'>
           <input type="email" className="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="email" onChange={this.amendStateInfo}/>
           <input type="text" className="form-control" id="usernameField" aria-describedby="emailHelp" placeholder="username"/>
           <input type="password" className="form-control" id="passwordField" aria-describedby="emailHelp" placeholder="password"/>
           <input type="password" className="form-control" id="confirmPasswordField" aria-describedby="emailHelp" placeholder="confirm password"/>
-          <button type="button" className="btn btn-primary" onClick={this.processSignUp}>Submit</button>
+          <button type="button" className="btn btn-primary" id="submitSignUp" onClick={this.processSignUp}>Submit</button>
         </div>
       </form>
     )

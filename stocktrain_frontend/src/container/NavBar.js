@@ -17,17 +17,17 @@ class NavBar extends Component {
         <div className='navbar-nav mr-auto'>
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Log In</button>
+              <button id="LoginTrig" className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Log In</button>
             </li>
             <li className="nav-item">
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Sign Up</button>
+              <button id="SignUpTrig" className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.props.loginActive}>Sign Up</button>
             </li>
             <li className="nav-item">
 
             </li>
             <form className="form-inline my-2 my-lg-0">
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>>
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button id="serachButton"className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
           </ul>
         </div>
