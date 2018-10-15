@@ -24,6 +24,8 @@ public class UsersTest {
 	public void tearDown() throws Exception {
 		
 	}
+	
+	// getters
 
 	@Test
 	public void usersTestUsername() {
@@ -38,6 +40,26 @@ public class UsersTest {
 	@Test
 	public void usersTestEmail() {
 		assertEquals(testEmail, testUser.getEmail());
+	}
+	
+	// setters
+	
+	@Test
+	public void usersSetUsername() {
+		testUser.setUsername("newUsername");
+		assertEquals("newUsername", testUser.getUsername());
+	}
+	
+	@Test
+	public void usersSetPassword() {
+		testUser.setPassword("newPassword");
+		assertEquals("newPassword", testUser.getPassword());
+	}
+	
+	@Test
+	public void usersSetEmail() {
+		testUser.setEmail("newEmail");
+		assertEquals("newEmail", testUser.getEmail());
 	}
 
 }
