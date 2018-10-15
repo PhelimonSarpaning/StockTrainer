@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class StockTrainerApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("webdriver.gecko.driver", "E://Program Files//selenium-java-3.14.0/geckodriver.exe");
 		SpringApplication.run(StockTrainerApplication.class, args);
 	}
 }

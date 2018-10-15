@@ -5,4 +5,4 @@
  * @author jackt
  *
  */
-package model;
+package com.JBank.src.repositories;

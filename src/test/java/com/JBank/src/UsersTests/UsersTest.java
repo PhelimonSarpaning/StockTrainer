@@ -5,15 +5,19 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
-import model.Users;
+import com.JBank.src.authentication.UsersAuthentication;
+import com.JBank.src.model.Users;
 
 public class UsersTest {
 	
 	private Users testUser;
 	private String testUsername = "testuser";
-	private String testPassword = "testPassword";
-	private String testEmail = "testEmail";
+	private String testPassword = "testPassword123";
+	private String testEmail = "testEmail@yahoo.com";
+	
+	// invalid information
 
 	@Before
 	public void setUp() throws Exception {
@@ -61,5 +65,4 @@ public class UsersTest {
 		testUser.setEmail("newEmail");
 		assertEquals("newEmail", testUser.getEmail());
 	}
-
 }

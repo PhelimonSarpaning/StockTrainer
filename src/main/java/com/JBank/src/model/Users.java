@@ -1,8 +1,7 @@
-package model;
+package com.JBank.src.model;
 
 import org.springframework.data.annotation.Id;
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 
 public class Users {
 	@Id
@@ -48,5 +47,10 @@ public class Users {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("User[id=%s, username=%s", this._id, this.username);
 	}
 }
