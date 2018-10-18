@@ -1,4 +1,4 @@
-package com.JBank.src.features;
+package com.JBank.src.Portfolio.Tests;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LoginFeatureTests {
+public class StockPurchaseTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -15,8 +15,6 @@ public class LoginFeatureTests {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
-	
 
 	@Test
 	public void test() {
