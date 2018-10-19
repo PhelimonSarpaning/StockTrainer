@@ -2,9 +2,12 @@ package com.JBank.src.authentication;
 
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
 import com.JBank.src.model.Users;
 import com.JBank.src.repositories.UsersRepository;
 
+@Component
 public class UsersAuthentication {
 	
 	private UsersAuthentication() { }
@@ -32,6 +35,22 @@ public class UsersAuthentication {
 	
 	public static boolean validPassword(String password) {
 		return passwordPattern.matcher(password).find() && password.length() > 8;
+	}
+	
+	public static void verifySignUp(String username, String password, String email) {
+		if(usernameExists(username) != null){
+			throw new IllegalArgumentException("Username Taken");
+		} else if(!validPassword(password)) {
+			throw new IllegalArgumentException("Invalid Password");
+		} else if(!validEmail(email)) {
+			throw new IllegalArgumentException("Invalid Email");
+		}
+	}
+	
+	public static void verifyLogin(String username, String password) {
+		if(usernameExists(username) == null || !verifyPassword(username, password)) {
+			throw new IllegalArgumentException("Invlaid Username or Password");
+		}
 	}
 	
 }

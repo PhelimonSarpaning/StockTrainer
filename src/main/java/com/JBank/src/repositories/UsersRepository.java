@@ -7,5 +7,5 @@ import com.JBank.src.model.Users;
 
 public interface UsersRepository extends MongoRepository<Users, String>{
 	Users findBy_id(ObjectId _id);	
-	public Users findByUsername(String username);
+	Users findByUsername(String username);
 }

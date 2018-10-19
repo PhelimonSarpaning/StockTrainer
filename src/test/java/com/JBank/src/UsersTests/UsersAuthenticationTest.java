@@ -25,8 +25,7 @@ public class UsersAuthenticationTest {
 	private String validSignupUsername = "validUsername";
 	private String validSignupPassword = "validPassword123";
 	private String validSignUpEmail = "validEmail@yahoo.com";
-	
-	private String invalidSignupUsername = " ";
+
 	private String invalidSignupPassword = " bad pass";
 	private String invalidSignUpEmail = "badEmail";
 	
@@ -37,6 +36,9 @@ public class UsersAuthenticationTest {
 	
 	// uses valid sign-up details for invalid login
 	
+	// for exceptions
+	
+	private String expectedMessage;
 
 	@Before
 	public void setUp() throws Exception {
@@ -94,5 +96,47 @@ public class UsersAuthenticationTest {
 	@Test
 	public void validPasswordFalse() {
 		assertFalse(UsersAuthentication.validPassword(invalidSignupPassword));
+	}
+	
+	// full cycle tests
+	
+	@Test
+	public void verifySignUpSuccess() {
+		try {
+			UsersAuthentication.verifySignUp(validSignupUsername, validLoginPassword, validSignUpEmail);
+		} catch(IllegalArgumentException e) {
+			fail("Exception should not be thrown");
+		}
+	}
+	
+	@Test
+	public void verifySignUpFail() {
+		expectedMessage = "Username Taken";
+		try {
+			UsersAuthentication.verifySignUp(validLoginUsername, invalidSignupPassword, invalidSignUpEmail);
+			fail("Exception should be thrown");
+		} catch(IllegalArgumentException e) {
+			assertEquals(expectedMessage, e.getMessage());
+		}
+	}
+	
+	@Test
+	public void verifyLoginSuccess() {
+		try {
+			UsersAuthentication.verifyLogin(validLoginUsername, validLoginPassword);
+		} catch(IllegalArgumentException e) {
+			fail("Exception should not be thrown");
+		}
+	}
+	
+	@Test
+	public void verifyLoginFail() {
+		expectedMessage = "Invlaid Username or Password";
+		try {
+			UsersAuthentication.verifyLogin(validSignupUsername, invalidSignupPassword);
+			fail("Exception should be thrown");
+		} catch(IllegalArgumentException e) {
+			assertEquals(expectedMessage, e.getMessage());
+		}
 	}
 }
