@@ -2,16 +2,18 @@ package com.JBank.src.authentication;
 
 import java.util.regex.Pattern;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.JBank.src.model.Users;
 import com.JBank.src.repositories.UsersRepository;
 
-@Component
+@Service
 public class UsersAuthentication {
 	
 	private UsersAuthentication() { }
 	
+	@Autowired
 	private static UsersRepository repository;
 	private static final Pattern emailPattern = Pattern.compile("[A-z0-9._%+-]+@[A-z.-]+\\.[A-z]{2,4}");
 	private static final Pattern passwordPattern = Pattern.compile("[A-z]+[0-9]|[0-9]+[A-z]");
@@ -26,7 +28,7 @@ public class UsersAuthentication {
 	}
 	
 	public static boolean verifyPassword(String username, String password) {
-		return repository.findByUsername(username).getPassword() == password;
+		return repository.findByUsername(username).getPassword().equals(password);
 	}
 	
 	public static boolean validEmail(String email) {

@@ -24,19 +24,8 @@ public class UsersController {
 	
 	@Autowired
 	UsersRepository repository;
-	
-	
-	UsersAuthentication authentication; // included for mocking
-	
+
 	private Users createdUser;
-	
-	// mocking injectors
-	
-	@Inject
-	public void injectMocks(UsersRepository mockRepository, UsersAuthentication mockAuthentication) {
-		this.repository = mockRepository;
-		this.authentication = mockAuthentication;
-	}
 	
 	@RequestMapping("/getUsers")
 	public List<Users> getUsers() {
@@ -54,7 +43,7 @@ public class UsersController {
 			@RequestParam("password") String password,
 			@RequestParam("email") String email) {
 		try {
-			this.authentication.verifySignUp(username, password, email);
+			UsersAuthentication.verifySignUp(username, password, email);
 			this.createdUser = this.repository.save(new Users(username, password, email));
 			return new ResponseEntity<>(createdUser, HttpStatus.OK);
 		} catch (IllegalArgumentException e) {
@@ -67,7 +56,7 @@ public class UsersController {
 			@RequestParam("username") String username,
 			@RequestParam("password") String password) {
 		try {
-			this.authentication.verifyLogin(username, password);
+			UsersAuthentication.verifyLogin(username, password);
 			this.createdUser = this.repository.findByUsername(username);
 			return new ResponseEntity<>(createdUser, HttpStatus.OK);
 		} catch(IllegalArgumentException e) {
