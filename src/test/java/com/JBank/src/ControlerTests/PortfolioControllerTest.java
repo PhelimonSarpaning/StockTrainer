@@ -1,7 +1,6 @@
 package com.JBank.src.ControlerTests;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -51,6 +50,7 @@ public class PortfolioControllerTest {
 	private String testPrice = "100";
 	private String testAmount = "5";
 	private String testName = "Jack's incorporated";
+	private String testError;
 	
 	MockHttpServletResponse testResponse;
 	
@@ -80,6 +80,25 @@ public class PortfolioControllerTest {
 				.andExpect(status().isOk())
 				.andReturn().getResponse();
 		assertThat(testResponse.getContentAsString()).contains("balance");
+	}
+	
+	// creation and deletion
+	
+	@Test
+	public void createPortfolioReturnsCreatedPortfolio() throws Exception {
+		when(usersRepository.findBy_id(testOwnerId)).thenReturn(mockUser);
+		testResponse = mockController.perform(post("/portfolio/new?user_id=" + testOwnerId.toString()))
+				.andExpect(status().isOk())
+				.andReturn().getResponse();
+	}
+	
+	@Test
+	public void createPortfolioReturnsErrorWhenInvalidId() throws Exception {
+		testError = "User not found";
+		testResponse = mockController.perform(post("/portfolio/new?user_id=" + testOwnerId.toString()))
+				.andExpect(status().isNotAcceptable())
+				.andReturn().getResponse();
+		assertThat(testResponse.getContentAsString()).contains(testError);
 	}
 	
 	// purchase tests

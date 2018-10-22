@@ -32,6 +32,17 @@ public class PortfolioController {
 	
 	// ownership actions
 	
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public ResponseEntity<Object> createPortfolio(@RequestParam("user_id") String user_id) {
+		try {
+			PurchaseAuthentication.user_idExists(new ObjectId(user_id));
+			portfolio = repository.save(new Portfolio(new ObjectId(user_id)));
+			return new ResponseEntity<>(portfolio, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+	
 	@RequestMapping(value="/makePurchaseBuy", method = RequestMethod.POST)
 	public ResponseEntity<Object> makeStockPurchase(
 			@RequestParam("price") String price,
@@ -50,4 +61,6 @@ public class PortfolioController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+	
+	
 }

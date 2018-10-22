@@ -34,7 +34,6 @@ public class StockPurchaseAuthenticationTest {
 	
 	private ObjectId testPortfolioId = new ObjectId();
 	private ObjectId testOwnerId = new ObjectId();
-	private String testUsername = "testusername";
 	private String expectedError;
 	
 	@Before
@@ -49,11 +48,11 @@ public class StockPurchaseAuthenticationTest {
 	@Test
 	public void verifyStockPurchasePassing() {
 		when(purchaseRepository.findBy_id(testPortfolioId)).thenReturn(mockPortfolio);
-		when(usersRepository.findByUsername(testUsername)).thenReturn(mockUser);
+		when(usersRepository.findBy_id(testOwnerId)).thenReturn(mockUser);
 		when(mockUser.get_id()).thenReturn(testOwnerId);
 		when(mockPortfolio.getOwnerId()).thenReturn(testOwnerId);
 		try {
-			PurchaseAuthentication.verifyStockPurchase(testPortfolioId, testUsername, mockPurchase);
+			PurchaseAuthentication.verifyStockPurchase(testPortfolioId, testOwnerId, mockPurchase);
 		} catch(IllegalArgumentException e) {
 			fail("exception should not be thrown " + e);
 		}
@@ -64,7 +63,7 @@ public class StockPurchaseAuthenticationTest {
 	public void verifyStockPurchaseBadPortfolio() {
 		expectedError = "Portfolio not found";
 		try {
-			PurchaseAuthentication.verifyStockPurchase(testPortfolioId, testUsername, mockPurchase);
+			PurchaseAuthentication.verifyStockPurchase(testPortfolioId, testOwnerId, mockPurchase);
 			fail("exception should be thrown");
 		} catch(IllegalArgumentException e) {
 			assertEquals(expectedError, e.getMessage());
@@ -76,7 +75,7 @@ public class StockPurchaseAuthenticationTest {
 		when(purchaseRepository.findBy_id(testPortfolioId)).thenReturn(mockPortfolio);
 		expectedError = "Invalid Credentials";
 		try {
-			PurchaseAuthentication.verifyStockPurchase(testPortfolioId, testUsername, mockPurchase);
+			PurchaseAuthentication.verifyStockPurchase(testPortfolioId, testOwnerId, mockPurchase);
 			fail("exception should be thrown");
 		} catch(IllegalArgumentException e) {
 			assertEquals(expectedError, e.getMessage());

@@ -2,6 +2,7 @@ package com.JBank.src.authentication;
 
 import javax.inject.Inject;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,11 @@ public class Authentication {
 	
 	public static Users usernameExists(String username) {
 		return usersRepository.findByUsername(username);
+	}
+	
+	public static void user_idExists(ObjectId user_id) {
+		if(usersRepository.findBy_id(user_id) == null) {
+			throw new IllegalArgumentException("User not found");
+		}
 	}
 }

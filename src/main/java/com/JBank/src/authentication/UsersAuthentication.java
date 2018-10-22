@@ -2,10 +2,8 @@ package com.JBank.src.authentication;
 
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.JBank.src.model.Users;
 import com.JBank.src.repositories.UsersRepository;
 
 @Service
