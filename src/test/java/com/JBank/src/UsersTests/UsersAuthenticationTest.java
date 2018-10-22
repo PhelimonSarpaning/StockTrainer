@@ -105,7 +105,7 @@ public class UsersAuthenticationTest {
 		try {
 			UsersAuthentication.verifySignUp(validSignupUsername, validLoginPassword, validSignUpEmail);
 		} catch(IllegalArgumentException e) {
-			fail("Exception should not be thrown");
+			fail("Exception should not be thrown ");
 		}
 	}
 	

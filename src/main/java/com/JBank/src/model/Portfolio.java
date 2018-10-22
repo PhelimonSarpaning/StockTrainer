@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
 import com.JBank.src.repositories.StockPurchaseRepository;
@@ -21,6 +22,7 @@ public class Portfolio {
 	private int portfolioValue;
 	private int balance;
 	
+	@Autowired
 	StockPurchaseRepository repository;
 	
 	public Portfolio(ObjectId ownerId) {
@@ -72,6 +74,7 @@ public class Portfolio {
 			this.balance -= price * amount;
 			this.portfolioValue += price * amount;
 		} catch(NullPointerException e) {
+			System.out.println(e.getMessage());
 			// todo error for repo problems
 		}
 		

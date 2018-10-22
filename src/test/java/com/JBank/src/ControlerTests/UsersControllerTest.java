@@ -118,5 +118,19 @@ public class UsersControllerTest {
 				.andReturn().getResponse();
 		assertEquals(responseError, testResponse.getContentAsString());
 	}
+	
+	// update
+	
+	@Test
+	public void updateChangesUserPassword() {
+		
+	}
+	
+	// delete
+	
+	@Test
+	public void deleteRemovesUserAccount() {
+		
+	}
 
 }

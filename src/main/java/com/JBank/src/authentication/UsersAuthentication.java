@@ -9,26 +9,20 @@ import com.JBank.src.model.Users;
 import com.JBank.src.repositories.UsersRepository;
 
 @Service
-public class UsersAuthentication {
+public class UsersAuthentication extends Authentication{
 	
 	private UsersAuthentication() { }
 	
-	@Autowired
-	private static UsersRepository repository;
 	private static final Pattern emailPattern = Pattern.compile("[A-z0-9._%+-]+@[A-z.-]+\\.[A-z]{2,4}");
 	private static final Pattern passwordPattern = Pattern.compile("[A-z]+[0-9]|[0-9]+[A-z]");
 	// for mocking only
 	
 	public static void setRepository(UsersRepository injRepository) {
-		repository = injRepository;
-	}
-	
-	public static Users usernameExists(String username) {
-		return repository.findByUsername(username);
+		usersRepository = injRepository;
 	}
 	
 	public static boolean verifyPassword(String username, String password) {
-		return repository.findByUsername(username).getPassword().equals(password);
+		return usersRepository.findByUsername(username).getPassword().equals(password);
 	}
 	
 	public static boolean validEmail(String email) {

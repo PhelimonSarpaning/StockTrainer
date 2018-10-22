@@ -1,4 +1,4 @@
-package com.JBank.src.Portfolio.Tests;
+package com.JBank.src.PortfolioTests;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
