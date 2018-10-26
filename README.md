@@ -32,4 +32,4 @@ Stock Trading Simulator
 - User can purchase a stock
 - User can track stock purchases
 
-I will be using [this](http://ftse.richardallen.co.uk/) api to get stock prices
+I will be using [this](https://iextrading.com/developer/docs/#unofficial-libraries-and-integrations) api to get stock prices
