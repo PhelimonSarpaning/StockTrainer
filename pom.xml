@@ -80,6 +80,14 @@
 			<artifactId>awaitility </artifactId>
 			<version>1.7.0</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.glassfish.jersey.core</groupId>
+		  <artifactId>jersey-client</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

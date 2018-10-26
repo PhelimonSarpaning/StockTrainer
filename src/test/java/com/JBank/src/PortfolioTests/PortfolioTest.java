@@ -12,6 +12,7 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 
 import com.JBank.src.model.Portfolio;
+import com.JBank.src.model.StockApiProcessor;
 import com.JBank.src.model.StockPurchase;
 import com.JBank.src.repositories.StockPurchaseRepository;
 import com.JBank.src.repositories.UsersRepository;
@@ -26,6 +27,10 @@ public class PortfolioTest {
 	private int testPurchasePrice = 100;
 	private int testPurchaseAmount = 431;
 	private String testPurchaseStockName = "Jack's Incorporated";
+	
+	private int expectedValue;
+	private int expectedBalance;
+	private int expectedCurrentValue;
 
 	@Mock
 	private StockPurchase mockPurchase =  mock(StockPurchase.class);
@@ -33,6 +38,9 @@ public class PortfolioTest {
 	@Mock
 	private StockPurchaseRepository mockRepository = mock(StockPurchaseRepository.class);
 
+	@Mock
+	private StockApiProcessor mockStockApi = mock(StockApiProcessor.class);
+	
 	@Before
 	public void setUp() throws Exception {
 		testPortfolio = new Portfolio(testOwnerId);
@@ -61,8 +69,13 @@ public class PortfolioTest {
 	}
 	
 	@Test
-	public void getPortfolioValueReturnsZero() {
-		assertEquals(0, testPortfolio.getPortfolioValue());
+	public void getPurchaseValueReturnsZero() {
+		assertEquals(0, testPortfolio.getPurchaseValue());
+	}
+	
+	@Test
+	public void getCurrentValueReturnsZero() {
+		assertEquals(0, testPortfolio.getCurrentValue());
 	}
 	
 	// single purchase tests
@@ -77,16 +90,16 @@ public class PortfolioTest {
 	
 	@Test
 	public void makeStockPurchaseDecreasesBalance() {
-		int expectedBalance = - testPurchasePrice * testPurchaseAmount;
+		expectedBalance = - testPurchasePrice * testPurchaseAmount;
 		makeStockPurchaseTest();
 		assertEquals(expectedBalance, testPortfolio.getBalance());
 	}
 	
 	@Test
 	public void makeStockPurchaseIncreasesValue() {
-		int expectedValue = testPurchasePrice * testPurchaseAmount;
+		expectedValue = testPurchasePrice * testPurchaseAmount;
 		makeStockPurchaseTest();
-		assertEquals(expectedValue, testPortfolio.getPortfolioValue());
+		assertEquals(expectedValue, testPortfolio.getPurchaseValue());
 	}
 	
 	@Test
@@ -99,5 +112,21 @@ public class PortfolioTest {
 	public void  getSavedPurchasesReturnsListOfPuchaseObjs() {
 		makeStockPurchaseTest();
 		assertEquals(mockPurchase, testPortfolio.getSavedPurchases().get(0));
+	}
+	
+	// api / profit tests
+	// mocks take stock and halve their value
+	
+	private void setStockApiMock() {
+		testPortfolio.injectMockStockApi(mockStockApi);
+	}
+	
+	@Test
+	public void getCurrentValueUsingMocks() {
+		expectedValue = testPurchasePrice * testPurchaseAmount;
+		expectedCurrentValue = expectedValue / 2;
+		setStockApiMock();
+		makeStockPurchaseTest();
+		assertEquals(expectedCurrentValue, testPortfolio.getCurrentValue());
 	}
 }

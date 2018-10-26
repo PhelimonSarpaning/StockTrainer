@@ -18,23 +18,33 @@ public class Portfolio {
 	public ObjectId _id;
 	public ObjectId _ownerId;
 	public ArrayList<ObjectId> purchaseHistory;
+	public String portfolioName;
 	
-	private int portfolioValue;
+	private int purchaseValue;
+	private int currentValue;
 	private int balance;
 	
 	@Autowired
-	StockPurchaseRepository repository;
+	private StockPurchaseRepository repository;
+	
+	private StockApiProcessor mockStockApi;
 	
 	public Portfolio(ObjectId ownerId) {
 		this._ownerId = ownerId;
 		this.purchaseHistory = new ArrayList<ObjectId>();
-		this.portfolioValue = 0;
+		this.purchaseValue = 0;
+		this.currentValue = 0;
 		this.balance = 0;
 	}
 	
 	@Inject
 	public void injectMockPurchaseRepository(StockPurchaseRepository mockRepository) {
 		this.repository = mockRepository;
+	}
+	
+	@Inject
+	public void injectMockStockApi(StockApiProcessor mockStockApi) {
+		this.mockStockApi = mockStockApi;
 	}
 	
 	public Object getOwnerId() {
@@ -57,8 +67,21 @@ public class Portfolio {
 		return this.balance;
 	}
 	
-	public int getPortfolioValue() {
-		return this.portfolioValue;
+	public int getPurchaseValue() {
+		return this.purchaseValue;
+	}
+	
+	public int caluclateCurrentValue() {
+		return 0;
+	}
+	
+	public int getCurrentValue() {
+		return this.currentValue;
+	}
+	
+	public int getPortfolioProfit() {
+		caluclateCurrentValue();
+		return this.currentValue - this.purchaseValue;
 	}
 	
 	public ArrayList<ObjectId> getPurchaseHistory() {
@@ -72,7 +95,7 @@ public class Portfolio {
 			purchase = repository.save(purchase);
 			this.purchaseHistory.add(purchase.get_id());
 			this.balance -= price * amount;
-			this.portfolioValue += price * amount;
+			this.purchaseValue += price * amount;
 		} catch(NullPointerException e) {
 			System.out.println(e.getMessage());
 			// todo error for repo problems
