@@ -9,13 +9,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.JBank.src.model.Stock;
 import com.JBank.src.model.StockApiProcessor;
 
 public class StockApiProcessorTest {
 	
 	private String testStockSym = "SNAP";
 	private String expectedName = "ANGLO AMERICAN";
-
+	
+	private Stock[] testStockList;
+	
 	@Before
 	public void setUp() throws Exception {
 		
@@ -32,8 +35,9 @@ public class StockApiProcessorTest {
 	}
 	
 	@Test
-	public void getAllStocksReturnsListOfStocks() throws IOException {
-//		StockApiProcessor.getAllStockData();
+	public void getAllStocksReturnsListOfStocks() throws IOException, ParseException {
+		testStockList = StockApiProcessor.getAllStockData();
+		
 	}
 
 }

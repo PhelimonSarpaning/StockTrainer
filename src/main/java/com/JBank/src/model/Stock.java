@@ -7,11 +7,9 @@ public class Stock {
 	private double price;
 	private double change;
 
-	public Stock(String symbol, String name, double price, double change) {
+	public Stock(String symbol, double price ) {
 		this.symbol = symbol;
-		this.name = name;
 		this.price = price;
-		this.change = change;
 	}
 	
 	public String getSymbol() {

@@ -21,7 +21,7 @@ public class StockTest {
 
 	@Before
 	public void setUp() throws Exception {
-		testStock = new Stock(testStockSymbol, testStockName, testStockPrice, testStockChange);
+		testStock = new Stock(testStockSymbol, testStockPrice);
 	}
 
 	@After
